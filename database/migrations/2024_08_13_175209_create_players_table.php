@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('number');
             $table->unsignedBigInteger('team_id');
             $table->timestamps();
-            $table->timestamp('deleted_at');
+            $table->timestamp('deleted_at')->nullable();
 
             $table->foreign('team_id')->references('id')->on('team')->onDelete('cascade');
         });
