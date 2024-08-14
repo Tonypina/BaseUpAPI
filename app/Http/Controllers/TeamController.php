@@ -40,12 +40,11 @@ class TeamController extends Controller
         
         try {
             $user_id = Auth::id();
-            
-            Log::error($user_id);
 
             $new_team = Team::create([
                 'name' => $request->name,
                 'logo_path' => $this->storeImageLocally($request->logo),
+                'user_id' => $user_id,
             ]);
 
             $new_team->user()->associate($user_id);
@@ -55,6 +54,7 @@ class TeamController extends Controller
                 $new_player = Player::create([
                     'name' => $player->name,
                     'number' => $player->number,
+                    'team_id' => $new_team->id
                 ]);
 
                 foreach ($player->positions as $position_acronym) {
