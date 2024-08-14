@@ -61,7 +61,11 @@ class TeamController extends Controller
 
                     Log::info($position_acronym);
 
-                    $new_player->positions()->attach(PositionCatalog::where($position_acronym, '=', 'acronym'));
+                    $position_id = PositionCatalog::where($position_acronym, '=', 'acronym')->id;
+
+                    Log::info($position_id);
+
+                    $new_player->positions()->attach($position_id);
                 }
 
                 $new_player->team()->associate($new_team);
