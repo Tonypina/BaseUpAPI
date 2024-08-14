@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PositionCatalogResource;
 use App\Models\PositionCatalog;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class PositionCatalogController extends Controller
      */
     public function index()
     {
-        //
+        return PositionCatalogResource::collection(PositionCatalog::all());
     }
 
     /**
