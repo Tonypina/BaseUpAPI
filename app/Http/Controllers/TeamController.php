@@ -54,8 +54,8 @@ class TeamController extends Controller
                 Log::info($player);
 
                 $new_player = Player::create([
-                    'name' => $player->name,
-                    'number' => $player->number,
+                    'name' => $player['name'],
+                    'number' => $player['number'],
                     'team_id' => $new_team->id
                 ]);
 
