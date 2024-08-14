@@ -19,7 +19,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return TeamResource::collection(Team::all()->withTrashed(false));
+        return TeamResource::collection(Team::withTrashed(false));
     }
 
     /**
