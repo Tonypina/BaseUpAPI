@@ -20,7 +20,14 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return TeamResource::collection(Auth::user()->teams);
+        $teams = Auth::user()->teams;
+
+        if ($teams) {
+
+            return TeamResource::collection($teams);
+        }
+
+        return response()->json('No tienes equipos', 402);
     }
 
     /**
