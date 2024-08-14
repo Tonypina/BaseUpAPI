@@ -50,8 +50,6 @@ class TeamController extends Controller
             $new_team->user()->associate($user_id);
 
             foreach ($request->players as $player) {
-                
-                Log::info($player);
 
                 $new_player = Player::create([
                     'name' => $player['name'],
