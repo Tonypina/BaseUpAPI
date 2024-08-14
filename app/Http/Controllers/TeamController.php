@@ -51,6 +51,8 @@ class TeamController extends Controller
 
             foreach ($request->players as $player) {
                 
+                Log::info($player);
+
                 $new_player = Player::create([
                     'name' => $player->name,
                     'number' => $player->number,
