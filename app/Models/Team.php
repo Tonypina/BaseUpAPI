@@ -16,6 +16,7 @@ class Team extends Model
     protected $fillable = [
         'name',
         'logo_path',
+        'user_id',
     ];
 
     protected $table = 'team';
