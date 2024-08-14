@@ -2,9 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PositionCatalogController;
-use App\Http\Controllers\TeamController;
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
@@ -32,5 +33,14 @@ Route::middleware(['auth:api'])->group(function () {
      */
     Route::controller(PositionCatalogController::class)->group(function () {
         Route::get('/positions', 'index');
+    });
+
+    /**
+     * Players Endpoint
+     */
+    Route::controller(PlayerController::class)->group(function () {
+        Route::get('/player/{player}', 'show');
+        Route::put('/player/{player}', 'update');
+        Route::delete('/player/{player}', 'destroy');
     });
 });
