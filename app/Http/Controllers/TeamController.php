@@ -59,6 +59,8 @@ class TeamController extends Controller
 
                 foreach ($player['positions'] as $position_acronym) {
 
+                    Log::info($position_acronym);
+
                     $new_player->positions()->attach(PositionCatalog::where($position_acronym, '=', 'acronym'));
                 }
 
