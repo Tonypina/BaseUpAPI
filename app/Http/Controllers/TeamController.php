@@ -23,8 +23,6 @@ class TeamController extends Controller
     {
         $teams = Auth::user()->teams;
 
-        Log::info($teams);
-
         if ($teams) {
 
             return TeamResource::collection($teams);
@@ -62,8 +60,6 @@ class TeamController extends Controller
                 foreach ($player['positions'] as $position_acronym) {
 
                     $position_id = PositionCatalog::where('acronym', '=', $position_acronym)->get();
-
-                    Log::info($position_id);
 
                     $new_player->positions()->attach($position_id);
                 }
