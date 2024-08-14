@@ -23,6 +23,8 @@ class TeamController extends Controller
     {
         $teams = Auth::user()->teams;
 
+        Log::info($teams);
+
         if ($teams) {
 
             return TeamResource::collection($teams);
