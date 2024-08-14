@@ -8,6 +8,7 @@ use App\Traits\HasImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Resources\TeamResource;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Validations\TeamValidationRules;
 
 class TeamController extends Controller
@@ -19,7 +20,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return TeamResource::collection(Team::withTrashed(false));
+        return TeamResource::collection(Auth::user()->teams);
     }
 
     /**
