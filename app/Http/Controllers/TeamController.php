@@ -27,7 +27,7 @@ class TeamController extends Controller
             return TeamResource::collection($teams);
         }
 
-        return response()->json('No tienes equipos', 402);
+        return [];
     }
 
     /**
