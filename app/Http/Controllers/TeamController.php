@@ -44,10 +44,8 @@ class TeamController extends Controller
                 'name' => $request->name,
                 'logo_path' => $this->storeImageLocally($request->logo),
             ]);
-
-            Log::info(Auth::user());
-
-            $new_team->user()->associate($request->user);
+            
+            $new_team->user()->associate(Auth::user());
 
             foreach ($request->players as $player) {
                 
