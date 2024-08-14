@@ -47,9 +47,7 @@ class TeamController extends Controller
 
             $user_id = Auth::id();
 
-            Log::info($user_id);
-
-            $new_team->user()->associate(Auth::user());
+            $new_team->user()->associate($user_id);
 
             foreach ($request->players as $player) {
                 
