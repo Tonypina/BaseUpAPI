@@ -39,15 +39,14 @@ class TeamController extends Controller
         $request->validate($this->teamStoreValidationRules());
         
         try {
+            $user_id = Auth::id();
+            
+            Log::error("User id: ", $user_id);
 
             $new_team = Team::create([
                 'name' => $request->name,
                 'logo_path' => $this->storeImageLocally($request->logo),
             ]);
-
-            $user_id = Auth::id();
-            
-            Log::error("User id: ", $user_id);
 
             $new_team->user()->associate($user_id);
 
