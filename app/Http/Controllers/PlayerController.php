@@ -12,6 +12,34 @@ class PlayerController extends Controller
 {
     use PlayerValidationRules;
 
+    public function store(Request $request) 
+    {
+        $request->validate($this->playerStoreValidationRules());
+
+        try {
+            
+            $newPlayer = Player::create([
+                'name' => $request->name,
+                'number' => $request->number,
+                'team_id' => $request->team_id,
+            ]);
+
+            foreach ($request->positions as $position) {
+                $newPlayer->positions()->attach($position);
+            }
+
+            $newPlayer->save();
+
+            return response()->json('Insertado con éxito', 201);
+
+        } catch (\Throwable $th) {
+            
+            Log::error($th);
+
+            return response()->json('Ocurrió un problema', 500);
+        }
+    }
+
     /**
      * Display the specified resource.
      */

@@ -39,6 +39,7 @@ Route::middleware(['auth:api'])->group(function () {
      * Players Endpoint
      */
     Route::controller(PlayerController::class)->group(function () {
+        Route::post('/player', 'store');
         Route::get('/player/{player}', 'show');
         Route::put('/player/{player}', 'update');
         Route::delete('/player/{player}', 'destroy');
