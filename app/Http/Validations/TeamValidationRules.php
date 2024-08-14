@@ -9,8 +9,8 @@ trait TeamValidationRules
         return [
             'name' => ['required', 'string', 'max:25'],
             'logo' => ['required'],
-            'players' => ['required', 'array'],
-            'players.*' => ['required', 'array:name,number'],
+            'players' => ['required', 'array:name,number,positions'],
+            'players.*.positions' => ['required', 'array'],
             'players.*.name' => ['required', 'string'],
             'players.*.number' => ['required', 'numeric', 'integer'],
         ];
@@ -21,8 +21,8 @@ trait TeamValidationRules
         return [
             'name' => ['string', 'max:25'],
             'logo' => [],
-            'players' => ['array'],
-            'players.*' => ['array:name,number'],
+            'players' => ['array:name,number,positions'],
+            'players.*.positions' => ['array'],
             'players.*.name' => ['string'],
             'players.*.number' => ['numeric', 'integer'],
         ];
