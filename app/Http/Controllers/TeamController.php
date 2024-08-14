@@ -57,9 +57,7 @@ class TeamController extends Controller
                     'team_id' => $new_team->id
                 ]);
 
-                foreach ($player['positions'] as $position_acronym) {
-
-                    $position_id = PositionCatalog::where('acronym', '=', $position_acronym)->get();
+                foreach ($player['positions'] as $position_id) {
 
                     $new_player->positions()->attach($position_id);
                 }
