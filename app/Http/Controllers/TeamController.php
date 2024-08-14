@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Resources\TeamResource;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Validations\TeamValidationRules;
+use App\Models\PositionCatalog;
 
 class TeamController extends Controller
 {
@@ -53,9 +54,9 @@ class TeamController extends Controller
                     'number' => $player->number,
                 ]);
 
-                foreach ($player->positions as $position_id) {
+                foreach ($player->positions as $position_acronym) {
 
-                    $new_player->positions()->attach($position_id);
+                    $new_player->positions()->attach(PositionCatalog::where($position_acronym, '=', 'acronym'));
                 }
 
                 $new_player->team()->associate($new_team);
