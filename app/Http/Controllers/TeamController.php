@@ -53,7 +53,10 @@ class TeamController extends Controller
                     'number' => $player->number,
                 ]);
 
-                $new_player->positions()->attach($player->position_id);
+                foreach ($player->positions as $position_id) {
+
+                    $new_player->positions()->attach($position_id);
+                }
 
                 $new_player->team()->associate($new_team);
 
