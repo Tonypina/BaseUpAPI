@@ -18,7 +18,7 @@ class PlayerResource extends JsonResource
         return [
             'name' => $this->name,
             'number' => $this->number,
-            'positions' => PositionCatalogResource::collection($this->positions()),
+            'positions' => PositionCatalogResource::collection($this->positions),
         ];
     }
 }

@@ -21,7 +21,7 @@ class TeamResource extends JsonResource
         return [
             'name' => $this->name,
             'logo' => $this->getImageFromPath($this->logo_path),
-            'players' => PlayerResource::collection($this->players()),
+            'players' => PlayerResource::collection($this->players),
         ];
     }
 }
