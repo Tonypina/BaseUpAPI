@@ -41,7 +41,7 @@ class TeamController extends Controller
         try {
             $user_id = Auth::id();
             
-            Log::error("User id: ", $user_id);
+            Log::error($user_id);
 
             $new_team = Team::create([
                 'name' => $request->name,
