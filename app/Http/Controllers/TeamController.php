@@ -61,7 +61,7 @@ class TeamController extends Controller
 
                     Log::info($position_acronym);
 
-                    $position_id = PositionCatalog::where($position_acronym, '=', 'acronym')->id;
+                    $position_id = PositionCatalog::where($position_acronym, '=', 'acronym')->get()->id;
 
                     Log::info($position_id);
 
