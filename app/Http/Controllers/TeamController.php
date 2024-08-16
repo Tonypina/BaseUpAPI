@@ -99,6 +99,22 @@ class TeamController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $team = Team::find($id);
+
+            $players = $team->players();
+
+            foreach ($players as $player) {
+                $player->delete();
+            }
+
+            $team->delete();
+            
+            return response()->json('Se liminó con éxito', 200);
+        } catch (\Throwable $th) {
+            Log::error($th);
+
+            return response()->json('Ocurrió un error', 500);
+        }
     }
 }
