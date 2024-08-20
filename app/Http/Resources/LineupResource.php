@@ -16,24 +16,20 @@ class LineupResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $players = [];
+
+        foreach ($this->players as $player) {
+            $players[] = [
+                'name' => $player->name,
+                'number' => $player->number,
+                'position' => $player->pivot->position_id,
+            ];
+        }
+        
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'players' => function () {
-                $players = [];
-
-                foreach ($this->players as $player) {
-                    $players[] = [
-                        'name' => $player->name,
-                        'number' => $player->number,
-                        'position' => $player->pivot->position_id,
-                    ];
-                }
-
-                Log::info($players);
-
-                return $players;
-            },
+            'players' => $players,
             'created_at' => $this->created_at,
         ];
     }
