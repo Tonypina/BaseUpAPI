@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Throwable;
+use App\Models\Team;
 use App\Models\Lineup;
+use App\Models\Player;
+use App\Traits\HasImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\LineupResource;
-use App\Models\Team;
-use App\Traits\HasImages;
-use Throwable;
 
 class LineupController extends Controller
 {
@@ -55,9 +56,11 @@ class LineupController extends Controller
 
             foreach ($request->players as $player) {
 
-                Log::info($player);
+                $savedPlayer = Player::find($player['id']);
 
-                $newLineup->players()->attach($player,
+                Log::info($savedPlayer);
+
+                $newLineup->players()->attach($savedPlayer,
                     ['position_id', $player['positions'][0]['id']]
                 );
             }
