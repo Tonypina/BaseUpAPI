@@ -24,16 +24,20 @@ class LineupController extends Controller
     
             if ($lineups) {
                 return [
-                    'team_logo' => $this->getImageFromPath($team->logo_path),
-                    'team_name' => $team->name,
-                    'lineups' => LineupResource::collection($lineups)
+                    'data' => [
+                        'team_logo' => $this->getImageFromPath($team->logo_path),
+                        'team_name' => $team->name,
+                        'lineups' => LineupResource::collection($lineups)
+                    ]
                 ];
             }
             
             return [
-                'team_logo' => $this->getImageFromPath($team->logo_path),
-                'team_name' => $team->name,
-                'lineups' => []
+                'data' => [
+                    'team_logo' => $this->getImageFromPath($team->logo_path),
+                    'team_name' => $team->name,
+                    'lineups' => []
+                ]
             ];
         } catch (\Throwable $th) {
             Log::error($th);
