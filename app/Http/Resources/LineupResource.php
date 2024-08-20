@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Traits\HasImages;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class LineupResource extends JsonResource
@@ -28,6 +29,8 @@ class LineupResource extends JsonResource
                         'position' => $player->pivot->position_id,
                     ];
                 }
+
+                Log::info($players);
 
                 return $players;
             },
