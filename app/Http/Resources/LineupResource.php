@@ -2,11 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Traits\HasImages;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class LineupResource extends JsonResource
 {
+    use HasImages;
+
     /**
      * Transform the resource into an array.
      *
@@ -16,6 +19,8 @@ class LineupResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'team_logo' => $this->getImageFromPath($this->team->logo_path),
+            'team_name' => $this->team->name,
             'name' => $this->name,
             'players' => function () {
                 $players = [];
