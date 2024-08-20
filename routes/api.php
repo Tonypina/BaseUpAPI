@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\LineupController;
 use App\Http\Controllers\PositionCatalogController;
 
 Route::post('login', [AuthController::class, 'login']);
@@ -43,5 +44,14 @@ Route::middleware(['auth:api'])->group(function () {
         Route::get('/player/{player}', 'show');
         Route::put('/player/{player}', 'update');
         Route::delete('/player/{player}', 'destroy');
+    });
+
+    /**
+     * Lineups Endpoint
+     */
+    Route::controller(LineupController::class)->group(function () {
+        Route::get('/team/{team}/lineup', 'index');
+        Route::post('/team/{team}/lineup', 'store');
+        Route::get('/lineup/{lineup}', 'show');
     });
 });
