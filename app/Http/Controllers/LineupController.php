@@ -8,14 +8,23 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\LineupResource;
 use App\Models\Team;
+use App\Traits\HasImages;
 
 class LineupController extends Controller
 {
+
+    use HasImages;
+
     public function index(string $team_id)
     {
-        $lineups = Team::find($team_id)->lineups;
+        $team = Team::find($team_id);
+        $lineups = $team->lineups;
 
-        return LineupResource::collection($lineups);
+        return [
+            'team_logo' => $this->getImageFromPath($team->logo_path),
+            'team_name' => $team->name,
+            'lineups' => LineupResource::collection($lineups)
+        ];
     }
 
     public function store(Request $request, string $team_id) 
