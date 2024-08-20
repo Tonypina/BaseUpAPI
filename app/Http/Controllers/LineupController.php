@@ -54,6 +54,9 @@ class LineupController extends Controller
             ]);
 
             foreach ($request->players as $player) {
+
+                Log::info($player);
+
                 $newLineup->players()->attach($player,
                     ['position_id', $player['positions'][0]['id']]
                 );
