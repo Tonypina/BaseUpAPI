@@ -20,6 +20,8 @@ class LineupController extends Controller
         $team = Team::find($team_id);
         $lineups = $team->lineups;
 
+        Log::info($team);
+
         if ($lineups) {
             return [
                 'team_logo' => $this->getImageFromPath($team->logo_path),
