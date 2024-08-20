@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\LineupResource;
 use App\Models\Team;
 use App\Traits\HasImages;
+use Throwable;
 
 class LineupController extends Controller
 {
@@ -17,24 +18,26 @@ class LineupController extends Controller
 
     public function index(string $team_id)
     {
-        $team = Team::find($team_id);
-        $lineups = $team->lineups;
-
-        Log::info($team);
-
-        if ($lineups) {
+        try {
+            $team = Team::find($team_id);
+            $lineups = $team->lineups;
+    
+            if ($lineups) {
+                return [
+                    'team_logo' => $this->getImageFromPath($team->logo_path),
+                    'team_name' => $team->name,
+                    'lineups' => LineupResource::collection($lineups)
+                ];
+            }
+            
             return [
                 'team_logo' => $this->getImageFromPath($team->logo_path),
                 'team_name' => $team->name,
-                'lineups' => LineupResource::collection($lineups)
+                'lineups' => []
             ];
+        } catch (\Throwable $th) {
+            Log::error($th);
         }
-        
-        return [
-            'team_logo' => $this->getImageFromPath($team->logo_path),
-            'team_name' => $team->name,
-            'lineups' => []
-        ];
     }
 
     public function store(Request $request, string $team_id) 
