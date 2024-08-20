@@ -41,4 +41,14 @@ class Player extends Model
     {
         return $this->belongsToMany(PositionCatalog::class, 'player_positions', 'player_id', 'position_id');
     }
+
+    /**
+     * The lineups that belong to the Player
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function lineups(): BelongsToMany
+    {
+        return $this->belongsToMany(Lineup::class, 'lineup_players', 'player_id', 'lineup_id');
+    }
 }

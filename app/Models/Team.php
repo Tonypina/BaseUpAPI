@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Lineup;
 use App\Models\Player;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -30,6 +31,16 @@ class Team extends Model
     public function players(): HasMany
     {
         return $this->hasMany(Player::class, 'team_id', 'id');
+    }
+
+    /**
+     * Get all of the lineups for the Team
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function lineups(): HasMany
+    {
+        return $this->hasMany(Lineup::class, 'team_id', 'id');
     }
 
     /**
