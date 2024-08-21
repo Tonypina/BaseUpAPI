@@ -66,6 +66,16 @@ class PositionCatalogSeeder extends Seeder
             'acronym' => 'ST',
             'description' => 'Sustituto',
         ]);
+        
+        DB::table('position_catalog')->insert([
+            'acronym' => 'DP',
+            'description' => 'Designated Player',
+        ]);
+        
+        DB::table('position_catalog')->insert([
+            'acronym' => 'F',
+            'description' => 'Flex',
+        ]);
 
     }
 }
