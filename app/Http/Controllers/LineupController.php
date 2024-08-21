@@ -55,6 +55,7 @@ class LineupController extends Controller
             
             $newLineup = Lineup::create([
                 'name' => $request->name,
+                'opposing_team' => $request->opposing_team,
                 'team_id' => $team_id,
             ]);
 

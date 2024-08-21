@@ -16,6 +16,7 @@ class Lineup extends Model
 
     protected $fillable = [
         'name',
+        'opposing_team',
         'team_id'
     ];
 

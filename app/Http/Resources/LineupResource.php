@@ -29,6 +29,7 @@ class LineupResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'opposing_team' => $this->opposing_team,
             'players' => $players,
             'created_at' => $this->created_at,
         ];
