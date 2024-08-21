@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('lineup', function (Blueprint $table) {
+        Schema::table('lineups', function (Blueprint $table) {
             $table->string('opposing_team', length: 100)->default('Opposing Team');
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('lineup', function($table) {
+        Schema::table('lineups', function($table) {
             $table->dropColumn('opposing_team');
         });
     }
