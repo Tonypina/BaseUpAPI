@@ -44,6 +44,8 @@ class TeamController extends Controller
             $new_team = Team::create([
                 'name' => $request->name,
                 'logo_path' => $this->storeImageLocally($request->logo),
+                'manager' => $request->manager,
+                'coach' => $request->coach,
                 'user_id' => $user_id,
             ]);
 

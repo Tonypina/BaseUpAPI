@@ -28,6 +28,8 @@ class LineupController extends Controller
                     'data' => [
                         'team_logo' => $this->getImageFromPath($team->logo_path),
                         'team_name' => $team->name,
+                        'team_manager' => $team->manager,
+                        'team_coach' => $team->coach,
                         'lineups' => LineupResource::collection($lineups)
                     ]
                 ];
@@ -37,6 +39,8 @@ class LineupController extends Controller
                 'data' => [
                     'team_logo' => $this->getImageFromPath($team->logo_path),
                     'team_name' => $team->name,
+                    'team_manager' => $team->manager,
+                    'team_coach' => $team->coach,
                     'lineups' => []
                 ]
             ];

@@ -8,6 +8,8 @@ trait TeamValidationRules
     {
         return [
             'name' => ['required', 'string', 'max:25'],
+            'manager' => ['required', 'string', 'max:100'],
+            'coach' => ['required', 'string', 'max:100'],
             'logo' => ['required'],
             'players' => ['required'],
             'players.*.positions' => ['required', 'array'],
@@ -21,6 +23,8 @@ trait TeamValidationRules
         return [
             'name' => ['string', 'max:25'],
             'logo' => [],
+            'manager' => ['string', 'max:25'],
+            'coach' => ['string', 'max:25'],
             'players' => [],
             'players.*.positions' => ['array'],
             'players.*.name' => ['string'],

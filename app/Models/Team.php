@@ -18,6 +18,8 @@ class Team extends Model
     protected $fillable = [
         'name',
         'logo_path',
+        'manager',
+        'coach',
         'user_id',
     ];
 
