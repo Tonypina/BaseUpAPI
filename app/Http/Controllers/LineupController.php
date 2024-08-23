@@ -65,8 +65,10 @@ class LineupController extends Controller
 
                 Log::info($savedPlayer);
 
-                $newLineup->players()->attach($savedPlayer->id,
-                    ['position_id' => $player['positions'][0]['id']]
+                $newLineup->players()->attach($savedPlayer->id, [
+                        'position_id' => $player['positions'][0]['id'],
+                        'is_flex' => $player['is_flex']
+                    ]
                 );
             }
 

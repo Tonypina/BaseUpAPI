@@ -23,6 +23,7 @@ class LineupResource extends JsonResource
                 'name' => $player->name,
                 'number' => $player->number,
                 'position' => $player->pivot->position_id,
+                'is_flex' => $player->pivot->is_flex,
             ];
         }
         
