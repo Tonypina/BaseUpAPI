@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('player_positions', function (Blueprint $table) {
+        Schema::table('lineup_players', function (Blueprint $table) {
             $table->boolean('is_flex')->default(false);
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('player_positions', function ($table) {
+        Schema::table('lineup_players', function ($table) {
             $table->dropColumn('is_flex');
         });
     }
