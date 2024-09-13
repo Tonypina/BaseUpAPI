@@ -23,7 +23,7 @@ class LineupController extends Controller
             $team = Team::find($team_id);
             $lineups = $team->lineups;
     
-            Log::info(LineupResource::collection($lineups)->sortBy([['created_at', 'desc']]));
+            Log::info(LineupResource::collection($lineups->sortBy([['created_at', 'desc']])));
 
             if ($lineups) {
                 return [
