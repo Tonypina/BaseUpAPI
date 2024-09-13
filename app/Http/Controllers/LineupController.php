@@ -30,7 +30,7 @@ class LineupController extends Controller
                         'team_name' => $team->name,
                         'team_manager' => $team->manager,
                         'team_coach' => $team->coach,
-                        'lineups' => LineupResource::collection($lineups)
+                        'lineups' => LineupResource::collection($lineups)->sortBy([['created_at', 'desc']])
                     ]
                 ];
             }
