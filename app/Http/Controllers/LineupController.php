@@ -21,10 +21,7 @@ class LineupController extends Controller
     {
         try {
             $team = Team::find($team_id);
-            $lineups = $team->lineups;
-    
-            Log::info($team->lineups()->orderBy('created_at', 'desc')->get());
-            Log::info($lineups);
+            $lineups = $team->lineups()->orderBy('created_at', 'desc')->get();
 
             if ($lineups) {
                 return [
