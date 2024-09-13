@@ -21,9 +21,9 @@ class LineupController extends Controller
     {
         try {
             $team = Team::find($team_id);
-            $lineups = $team->lineups;
+            $lineups = $team->lineups->orderBy('created_at', 'desc')->get();
     
-            Log::info(LineupResource::collection($lineups)->sortBy([['created_at', 'desc']])->toArray());
+            Log::info(LineupResource::collection($lineups));
 
             if ($lineups) {
                 return [
