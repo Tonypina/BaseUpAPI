@@ -19,6 +19,9 @@ class LineupResource extends JsonResource
         $players = [];
 
         foreach ($this->players as $player) {
+
+            Log::info($player->pivot->is_flex);
+
             $players[] = [
                 'name' => $player->name,
                 'number' => $player->number,
