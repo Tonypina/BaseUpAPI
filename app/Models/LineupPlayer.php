@@ -10,6 +10,7 @@ class LineupPlayer extends Pivot
     use HasFactory;
 
     protected $fillable = [
-        'position_id'
+        'position_id',
+        'is_flex',
     ];
 }

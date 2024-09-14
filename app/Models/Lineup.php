@@ -37,6 +37,6 @@ class Lineup extends Model
      */
     public function players(): BelongsToMany
     {
-        return $this->belongsToMany(Player::class, 'lineup_players', 'lineup_id', 'player_id')->withPivot('position_id');
+        return $this->belongsToMany(Player::class, 'lineup_players', 'lineup_id', 'player_id')->withPivot(['position_id', 'is_flex']);
     }
 }
