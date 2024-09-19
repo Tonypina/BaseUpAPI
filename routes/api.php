@@ -3,13 +3,21 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
+use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\LineupController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\LineupController;
 use App\Http\Controllers\PositionCatalogController;
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
+
+/**
+ * Google Login
+ */
+Route::get('oauth/google', [GoogleController::class, 'handleRedirect']);
+Route::get('google-callback', [GoogleController::class, 'handleCallback']);
 
 Route::middleware(['auth:api'])->group(function () {
 
