@@ -9,7 +9,7 @@ use Laravel\Socialite\Facades\Socialite;
 class GoogleController extends Controller
 {
     public function handleRedirect(Request $request) {
-        return Socialite::driver()->redirect();
+        return Socialite::driver('google')->redirect();
     } 
 
     public function handleCallback(Request $request) {
