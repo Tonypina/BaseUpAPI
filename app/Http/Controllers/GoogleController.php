@@ -25,7 +25,7 @@ class GoogleController extends Controller
             ]);
         }
 
-        $token = $user->createToken('authToken')->plainTextToken;
+        $token = $user->createToken('BaseupAPI')->accessToken;
 
         return redirect('baseup://google-callback?token'. $token);
     } 
