@@ -11,7 +11,6 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PositionCatalogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\VerificationController;
-use Illuminate\Support\Facades\Auth;
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
@@ -21,13 +20,10 @@ Route::post('register', [AuthController::class, 'register']);
  */
 Route::get('oauth/google', [GoogleController::class, 'handleRedirect']);
 Route::get('google-callback', [GoogleController::class, 'handleCallback']);
+Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
+Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
-/**
- * Email Verification Endpoint
- */
-Auth::routes(['verify' => true]);
-
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth:api', 'verified'])->group(function () {
 
     /**
      * User Endpoint
