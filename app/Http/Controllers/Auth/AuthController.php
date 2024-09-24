@@ -31,6 +31,7 @@ class AuthController extends BaseController
         $user = User::create($input);
         $success['token'] =  $user->createToken('BaseupAPI')->accessToken;
         $success['name'] =  $user->name;
+        $success['email'] =  $user->email;
    
         return $this->sendResponse($success, 'User register successfully.');
     }
@@ -45,6 +46,7 @@ class AuthController extends BaseController
             $user = Auth::user(); 
             $success['token'] =  $request->user()->createToken('BaseupAPI')->accessToken; 
             $success['name'] =  $user->name;
+            $success['email'] =  $user->email;
    
             return $this->sendResponse($success, 'User login successfully.');
         
