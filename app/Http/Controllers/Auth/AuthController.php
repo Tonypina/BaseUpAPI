@@ -49,6 +49,7 @@ class AuthController extends BaseController
             $user = Auth::user(); 
 
             if (!$user->hasVerifiedEmail()) {
+                $request->user()->sendEmailVerificationNotification();
                 return $this->sendError('Email not verified.', ['error' => 'You need to verify your email before logging in.']);
             }
 
