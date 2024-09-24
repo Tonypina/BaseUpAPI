@@ -20,17 +20,17 @@ Route::post('register', [AuthController::class, 'register']);
  */
 Route::get('oauth/google', [GoogleController::class, 'handleRedirect']);
 Route::get('google-callback', [GoogleController::class, 'handleCallback']);
-Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
-Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
 Route::middleware(['auth:api', 'verified'])->group(function () {
-
+    
     /**
      * User Endpoint
      */
     Route::post('logout', [AuthController::class, 'logout']);
     Route::put('/user', [UserController::class, 'update']);
     Route::delete('/user', [UserController::class, 'destroy']);
+    Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
+    Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
     /**
      * Teams Endpoint
