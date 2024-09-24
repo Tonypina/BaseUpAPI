@@ -12,7 +12,7 @@ class VerificationController extends Controller
     // Verificar el correo del usuario
     public function verify(Request $request)
     {
-        $user = Auth::user();
+        $user = $request->user();
 
         if ($user->hasVerifiedEmail()) {
             return response()->json(['message' => 'Already verified'], 400);
@@ -28,7 +28,7 @@ class VerificationController extends Controller
     // Reenviar el correo de verificación
     public function resend(Request $request)
     {
-        $user = Auth::user();
+        $user = $request->user();
 
         if ($user->hasVerifiedEmail()) {
             return response()->json(['message' => 'Already verified'], 400);
