@@ -20,6 +20,8 @@ Route::post('register', [AuthController::class, 'register']);
  */
 Route::get('oauth/google', [GoogleController::class, 'handleRedirect']);
 Route::get('google-callback', [GoogleController::class, 'handleCallback']);
+Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
+Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
 Route::middleware(['auth:api'])->group(function () {
 
@@ -27,8 +29,6 @@ Route::middleware(['auth:api'])->group(function () {
      * User Endpoint
      */
     Route::post('logout', [AuthController::class, 'logout']);
-    Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
-    Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
     Route::put('/user', [UserController::class, 'update']);
     Route::delete('/user', [UserController::class, 'destroy']);
 
