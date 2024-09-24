@@ -32,7 +32,7 @@ class VerificationController extends Controller
             event(new Verified($user));
         }
 
-        return response()->json(['message' => 'Email verified successfully']);
+        return response()->noContent();
     }
 
     // Reenviar el correo de verificación
