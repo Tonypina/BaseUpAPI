@@ -17,7 +17,7 @@ class AuthController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
@@ -29,11 +29,14 @@ class AuthController extends BaseController
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
+
+        $user->sendEmailVerificationNotification();
+
         $success['token'] =  $user->createToken('BaseupAPI')->accessToken;
         $success['name'] =  $user->name;
         $success['email'] =  $user->email;
    
-        return $this->sendResponse($success, 'User register successfully.');
+        return $this->sendResponse($success, 'User register successfully. Please verify your email.');
     }
      
     /**
@@ -44,6 +47,11 @@ class AuthController extends BaseController
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
         
             $user = Auth::user(); 
+
+            if (!$user->hasVerifiedEmail()) {
+                return $this->sendError('Email not verified.', ['error' => 'You need to verify your email before logging in.']);
+            }
+
             $success['token'] =  $request->user()->createToken('BaseupAPI')->accessToken; 
             $success['name'] =  $user->name;
             $success['email'] =  $user->email;
