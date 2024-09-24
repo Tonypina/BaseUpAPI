@@ -3,21 +3,31 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class VerificationController extends Controller
 {
     // Verificar el correo del usuario
-    public function verify(Request $request)
+    public function verify(Request $request, $id, $hash)
     {
-        $user = $request->user();
+        // Obtener el usuario por ID
+        $user = User::findOrFail($id);
 
-        if ($user->hasVerifiedEmail()) {
-            return response()->json(['message' => 'Already verified'], 400);
+        // Verificar que el hash concuerde con el email del usuario
+        if (!hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+            return response()->json(['message' => 'Invalid verification link'], 400);
         }
 
+        // Verificar si ya está verificado
+        if ($user->hasVerifiedEmail()) {
+            return response()->json(['message' => 'Email already verified'], 400);
+        }
+
+        // Marcar el correo como verificado
         if ($user->markEmailAsVerified()) {
             event(new Verified($user));
         }
@@ -28,10 +38,10 @@ class VerificationController extends Controller
     // Reenviar el correo de verificación
     public function resend(Request $request)
     {
-        $user = $request->user();
+        $user = Auth::user();
 
         if ($user->hasVerifiedEmail()) {
-            return response()->json(['message' => 'Already verified'], 400);
+            return response()->json(['message' => 'Email already verified'], 400);
         }
 
         $user->sendEmailVerificationNotification();
