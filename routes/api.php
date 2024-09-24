@@ -9,6 +9,7 @@ use App\Http\Controllers\LineupController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PositionCatalogController;
+use App\Http\Controllers\UserController;
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
@@ -22,9 +23,11 @@ Route::get('google-callback', [GoogleController::class, 'handleCallback']);
 Route::middleware(['auth:api'])->group(function () {
 
     /**
-     * Logout Endpoint
+     * User Endpoint
      */
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::put('/user', [UserController::class, 'update']);
+    Route::delete('/user', [UserController::class, 'destroy']);
 
     /**
      * Teams Endpoint
