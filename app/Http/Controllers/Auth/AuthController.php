@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Auth\BaseController as BaseController;
-     
+use Illuminate\Auth\Events\Registered;
+
 class AuthController extends BaseController
 {
     /**
@@ -30,13 +31,15 @@ class AuthController extends BaseController
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
 
-        $user->sendEmailVerificationNotification();
-
-        $success['token'] =  $user->createToken('BaseupAPI')->accessToken;
-        $success['name'] =  $user->name;
-        $success['email'] =  $user->email;
-   
-        return $this->sendResponse($success, 'User register successfully. Please verify your email.');
+        if ($user) {
+            event(new Registered($user));
+            
+            $success['token'] =  $user->createToken('BaseupAPI')->accessToken;
+            $success['name'] =  $user->name;
+            $success['email'] =  $user->email;
+       
+            return $this->sendResponse($success, 'User register successfully. Please verify your email.');
+        }
     }
      
     /**
