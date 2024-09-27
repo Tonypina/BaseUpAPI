@@ -32,7 +32,8 @@ class VerificationController extends Controller
             event(new Verified($user));
         }
 
-        return response()->noContent();
+        $redirectUrl = 'baseup://verified-email';
+        return redirect()->away($redirectUrl);
     }
 
     // Reenviar el correo de verificación
